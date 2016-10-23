@@ -35,17 +35,20 @@ public class Application extends Controller {
         userJson.put("id",user.id);
         userJson.put("email",user.email);
         userJson.put("password",user.password);
-        return ok(userJson);}
+        return ok(userJson);
+    }
+
     public Result signup(){
         Form<SignupForm>signupForm=formFactory.form(SignupForm.class).bindFromRequest();
         if(signupForm.hasErrors()){
-        return ok(signupForm.errorsAsJson());
-    }
+            return ok(signupForm.errorsAsJson());
+        }
         Profile profile=new Profile(signupForm.data().get("firstName"),signupForm.data().get("lastName"));
         Profile.db().save(profile);
         User user=new User(signupForm.data().get("email"),signupForm.data().get("password"));
         user.profile=profile;
         user.db().save(user);
-        return ok((JsonNode)objectMapper.valueToTree(user));}
+        return ok((JsonNode)objectMapper.valueToTree(user));
+    }
 
 }
