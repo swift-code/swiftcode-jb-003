@@ -14,7 +14,7 @@ public class Profile extends Model{
     public Long id;
     public String firstName;
     public String lastName;
-    public String comapny;
+    public String company;
     public static Model.Finder<Long,Profile> find = new Model.Finder<Long,Profile>(Profile.class);
 
     public Profile(String firstName, String lastName) {
